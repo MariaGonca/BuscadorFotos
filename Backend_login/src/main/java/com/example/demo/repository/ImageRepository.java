@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 	 * @param tags the tags
 	 * @return the list
 	 */
-	Optional<Image> findByTags(String tags);
+	List<Image> findByTags(String tags);
 
 	
 	/**
@@ -29,5 +29,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 	 * @param title the title
 	 * @return the list
 	 */
-	Optional<Image> findByTitle(String title);
+	List<Image> findByTitle(String title);
 }

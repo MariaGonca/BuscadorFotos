@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,15 +43,20 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	}
 
 	@Override
-	public Optional<Image> searchByTags(String imageTag) {
+	public List<Image> searchByTags(String imageTag) {
 		return imageRepository.findByTags(imageTag);
 		
 	}
 
 	@Override
-	public Optional<Image> searchByTitle(String imageTitle) {
+	public List<Image> searchByTitle(String imageTitle) {
 		return imageRepository.findByTitle(imageTitle);
 		
+	}
+
+	@Override
+	public List<Image> searchAll() {
+		return imageRepository.findAll();
 	}
 
 

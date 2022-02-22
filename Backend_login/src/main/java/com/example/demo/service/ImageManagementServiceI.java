@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import com.example.demo.models.Image;
 
@@ -36,7 +36,7 @@ public interface ImageManagementServiceI {
 	 * @param imageTag the image tag
 	 * @return 
 	 */
-	public Optional<Image> searchByTags(final String imageTag);
+	public List<Image> searchByTags(final String imageTag);
 	
 	/**
 	 * Search by title.
@@ -44,6 +44,13 @@ public interface ImageManagementServiceI {
 	 * @param imageTitle the image title
 	 * @return 
 	 */
-	public Optional<Image> searchByTitle(final String imageTitle);
+	public List<Image> searchByTitle(final String imageTitle);
+	
+	/**
+	 * Search all.
+	 *
+	 * @return the optional
+	 */
+	public List<Image> searchAll();
 	
 }
