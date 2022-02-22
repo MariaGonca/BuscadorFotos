@@ -11,17 +11,29 @@ import com.example.demo.security.UserDetailsImpl;
 
 import io.jsonwebtoken.*;
 
+/**
+ * The Class JWTUtils.
+ */
 @Component
 public class JWTUtils {
 	
+	/** The Constant logger. */
 	private static final Logger logger = LoggerFactory.getLogger(JWTUtils.class);
 	
+	/** The jwt secret. */
 	@Value("${com.example.jwtSecret}")
 	private String jwtSecret;
 	
+	/** The jwt expiration ms. */
 	@Value("${com.example.jwtExpirationMs}")
 	private int jwtExpirationMs;
 	
+	/**
+	 * Generate jwt token.
+	 *
+	 * @param authentication the authentication
+	 * @return the string
+	 */
 	public String generateJwtToken(Authentication authentication) {
 	
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -34,10 +46,22 @@ public class JWTUtils {
 		.compact();
 	}
 	
+	/**
+	 * Gets the user name from jwt token.
+	 *
+	 * @param token the token
+	 * @return the user name from jwt token
+	 */
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 	
+	/**
+	 * Validate jwt token.
+	 *
+	 * @param authToken the auth token
+	 * @return true, if successful
+	 */
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

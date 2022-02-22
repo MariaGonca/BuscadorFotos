@@ -17,15 +17,31 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.demo.security.UserDetailsServiceImpl;
 
+/**
+ * The Class AuthTokenFilter.
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
 	
+	/** The jwt utils. */
 	@Autowired
 	private JWTUtils jwtUtils;
 	
+	/** The user details service. */
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	/** The Constant logger. */
 	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 	
+	/**
+	 * Do filter internal.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param filterChain the filter chain
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 	throws ServletException, IOException {
@@ -46,6 +62,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	}
 	
 	
+	/**
+	 * Parses the jwt.
+	 *
+	 * @param request the request
+	 * @return the string
+	 */
 	private String parseJwt(HttpServletRequest request) {
 		String headerAuth = request.getHeader("Authorization");
 		if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {

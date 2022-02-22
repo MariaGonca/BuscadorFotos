@@ -32,25 +32,40 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.security.UserDetailsImpl;
 import com.example.demo.security.JWT.*;
 
+/**
+ * The Class AuthController.
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+	
+	/** The authentication manager. */
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	/** The user repository. */
 	@Autowired
 	UserRepository userRepository;
 
+	/** The role repository. */
 	@Autowired
 	RoleRepository roleRepository;
 
+	/** The encoder. */
 	@Autowired
 	PasswordEncoder encoder;
 
+	/** The jwt utils. */
 	@Autowired
 	JWTUtils jwtUtils;
 
+	/**
+	 * Authenticate user.
+	 *
+	 * @param loginRequest the login request
+	 * @return the response entity
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -68,6 +83,12 @@ public class AuthController {
 				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
 
+	/**
+	 * Register user.
+	 *
+	 * @param signUpRequest the sign up request
+	 * @return the response entity
+	 */
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {

@@ -10,11 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.models.User;
 import com.example.demo.repository.*;
 
+/**
+ * The Class UserDetailsServiceImpl.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+	
+	/** The user repository. */
 	@Autowired
 	UserRepository userRepository;
 	
+	/**
+	 * Load user by username.
+	 *
+	 * @param username the username
+	 * @return the user details
+	 * @throws UsernameNotFoundException the username not found exception
+	 */
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
