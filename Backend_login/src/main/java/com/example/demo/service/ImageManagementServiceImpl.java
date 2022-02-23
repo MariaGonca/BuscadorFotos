@@ -8,12 +8,22 @@ import org.springframework.stereotype.Service;
 import com.example.demo.models.Image;
 import com.example.demo.repository.ImageRepository;
 
+
+/**
+ * The Class ImageManagementServiceImpl.
+ */
 @Service
 public class ImageManagementServiceImpl implements ImageManagementServiceI {
 
+	/** The image repository. */
 	@Autowired
 	private ImageRepository imageRepository;
 	
+	/**
+	 * Insert new image.
+	 *
+	 * @param newImage the new image
+	 */
 	@Override
 	public void insertNewImage(Image newImage) {
 	if(newImage != null && newImage.getID() == null) {
@@ -23,6 +33,11 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 		
 	}
 
+	/**
+	 * Update image.
+	 *
+	 * @param updatedImage the updated image
+	 */
 	@Override
 	public void updateImage(Image updatedImage) {
 		if(updatedImage != null && updatedImage.getID() == null) {
@@ -32,6 +47,11 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 		
 	}
 
+	/**
+	 * Delete image.
+	 *
+	 * @param deletedImage the deleted image
+	 */
 	@Override
 	public void deleteImage(Image deletedImage) {
 		if(deletedImage != null && deletedImage.getID() == null) {
@@ -42,18 +62,35 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 		
 	}
 
+	/**
+	 * Search by tags.
+	 *
+	 * @param imageTag the image tag
+	 * @return the list
+	 */
 	@Override
 	public List<Image> searchByTags(String imageTag) {
 		return imageRepository.findByTags(imageTag);
 		
 	}
 
+	/**
+	 * Search by title.
+	 *
+	 * @param imageTitle the image title
+	 * @return the list
+	 */
 	@Override
 	public List<Image> searchByTitle(String imageTitle) {
 		return imageRepository.findByTitle(imageTitle);
 		
 	}
 
+	/**
+	 * Search all.
+	 *
+	 * @return the list
+	 */
 	@Override
 	public List<Image> searchAll() {
 		return imageRepository.findAll();
