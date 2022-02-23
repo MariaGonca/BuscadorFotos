@@ -25,7 +25,7 @@ public class Image implements Serializable {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long ID;
+	private Long idImage;
 
 	/** The title. */
 	@Column(name = "title", nullable = false)
@@ -66,8 +66,8 @@ public class Image implements Serializable {
 	 *
 	 * @return the id
 	 */
-	public Long getID() {
-		return ID;
+	public Long getIdImage() {
+		return idImage;
 	}
 
 	/**
@@ -75,8 +75,8 @@ public class Image implements Serializable {
 	 *
 	 * @param iD the new id
 	 */
-	public void setID(Long iD) {
-		this.ID = iD;
+	public void setIdImage(Long iD) {
+		this.idImage = iD;
 	}
 
 	/**

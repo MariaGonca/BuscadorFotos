@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Image;
-import com.example.demo.payload.request.MessageResponse;
 import com.example.demo.service.ImageManagementServiceImpl;
 
 /**
@@ -26,11 +26,10 @@ import com.example.demo.service.ImageManagementServiceImpl;
 @RestController
 @RequestMapping("/api")
 public class ImageController {
-	
+
 	/** The image service. */
 	@Autowired
-	ImageManagementServiceImpl imageService;
-	
+	private ImageManagementServiceImpl imageService;
 
 	/**
 	 * Gets the all images.
@@ -59,23 +58,29 @@ public class ImageController {
 	}
 
 	@GetMapping("/imagenes")
-	public List<Image> findAll(){
+	public List<Image> findAll() {
 		return imageService.searchAll();
 	}
 
 	@GetMapping("/images/find/{title}")
-	public List<Image> getImages(@PathVariable String title){
+	public List<Image> getImages(@PathVariable String title) {
 		List<Image> images = imageService.searchByTitle(title);
-		if(images == null) {
+		if (images == null) {
 			throw new RuntimeException("Image not found " + title);
 		}
 		return images;
 	}
-	
+
 	@PostMapping("/images/add")
-	public ResponseEntity<?> addClient(@RequestBody Image image) {
-			imageService.insertNewImage(image);
-			return ResponseEntity.ok(new MessageResponse("Images registered successfully!"));
+	public void addClient(@RequestBody Image image) {
+		imageService.insertNewImage(image);
+	}
+
+	@DeleteMapping("/images/delete/{idImage}")
+	public void deleteImage(@PathVariable Long idImage) {
+		Image deletedImage = imageService.searchByIdImage(idImage);
+		if (deletedImage != null)
+			imageService.deleteImage(deletedImage);
+
 	}
 }
-

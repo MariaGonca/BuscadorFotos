@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.models.Image;
 import com.example.demo.repository.ImageRepository;
 
-
 /**
  * The Class ImageManagementServiceImpl.
  */
@@ -18,7 +17,7 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	/** The image repository. */
 	@Autowired
 	private ImageRepository imageRepository;
-	
+
 	/**
 	 * Insert new image.
 	 *
@@ -26,11 +25,11 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	 */
 	@Override
 	public void insertNewImage(Image newImage) {
-	if(newImage != null && newImage.getID() == null) {
-		
-		imageRepository.saveAndFlush(newImage);
-	}
-		
+		if (newImage != null && newImage.getIdImage() == null) {
+
+			imageRepository.saveAndFlush(newImage);
+		}
+
 	}
 
 	/**
@@ -40,11 +39,11 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	 */
 	@Override
 	public void updateImage(Image updatedImage) {
-		if(updatedImage != null && updatedImage.getID() == null) {
-			
+		if (updatedImage != null && updatedImage.getIdImage() == null) {
+
 			imageRepository.saveAndFlush(updatedImage);
 		}
-		
+
 	}
 
 	/**
@@ -54,12 +53,11 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	 */
 	@Override
 	public void deleteImage(Image deletedImage) {
-		if(deletedImage != null && deletedImage.getID() == null) {
-			
+		if (deletedImage != null && deletedImage.getIdImage() != null) {
+
 			imageRepository.delete(deletedImage);
 		}
 
-		
 	}
 
 	/**
@@ -71,7 +69,7 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	@Override
 	public List<Image> searchByTags(String imageTag) {
 		return imageRepository.findByTags(imageTag);
-		
+
 	}
 
 	/**
@@ -83,7 +81,7 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 	@Override
 	public List<Image> searchByTitle(String imageTitle) {
 		return imageRepository.findByTitle(imageTitle);
-		
+
 	}
 
 	/**
@@ -96,9 +94,15 @@ public class ImageManagementServiceImpl implements ImageManagementServiceI {
 		return imageRepository.findAll();
 	}
 
-
-
-
-	
+	/**
+	 * Search by id image.
+	 *
+	 * @param idImage the id image
+	 * @return the image
+	 */
+	@Override
+	public Image searchByIdImage(Long idImage) {
+		return imageRepository.findByIdImage(idImage);
+	}
 
 }

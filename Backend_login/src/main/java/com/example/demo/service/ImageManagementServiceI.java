@@ -53,4 +53,12 @@ public interface ImageManagementServiceI {
 	 */
 	public List<Image> searchAll();
 	
+	/**
+	 * Search by id image.
+	 *
+	 * @param idImage the id image
+	 * @return the image
+	 */
+	public Image searchByIdImage(final Long idImage);
+	
 }
